@@ -18,7 +18,7 @@ mesh = SubResource("BoxMesh_r150o")
 script = ExtResource("1_idj7w")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.595826)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.84981406)
 
 [node name="CelestialBody" parent="CameraRoot" node_paths=PackedStringArray("ParentCamera") instance=ExtResource("3_kln2b")]
 ParentCamera = NodePath("../Camera3D")
