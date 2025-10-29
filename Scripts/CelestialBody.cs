@@ -79,6 +79,8 @@ public partial class CelestialBody : MeshInstance3D
 			_currentScreenSize = ParentCamera.GetWindow().Size;
 			imageHeight = GetPixelWidth(ParentCamera);
 
+			GD.Print(imageHeight);
+
 			updateComputePipeline(imageHeight);
 			_dispatachSize = (uint)Mathf.CeilToInt(imageHeight / 8.0f);
 			createNewImage = true;

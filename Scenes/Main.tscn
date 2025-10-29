@@ -1,11 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm0mof0y7varc"]
+[gd_scene load_steps=10 format=3 uid="uid://dm0mof0y7varc"]
 
 [ext_resource type="Script" uid="uid://cm0gqqkqydc1o" path="res://Scripts/CameraRoot.cs" id="1_idj7w"]
 [ext_resource type="Script" uid="uid://5wy1kwtu8rxw" path="res://Scripts/Main.cs" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://ivq7uthfgkfk" path="res://Scenes/celestial_body.tscn" id="3_kln2b"]
 [ext_resource type="Script" uid="uid://dklu1r05mtw12" path="res://Scripts/Label.cs" id="4_rgh2o"]
+[ext_resource type="Shader" uid="uid://v5k1sddhfh8n" path="res://Scripts/Stars.gdshader" id="5_pbw6q"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r150o"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pbw6q"]
+flip_faces = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1gob"]
+render_priority = 0
+shader = ExtResource("5_pbw6q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbw6q"]
+render_priority = 0
+shader = ExtResource("5_pbw6q")
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_kln2b")
@@ -18,9 +30,10 @@ mesh = SubResource("BoxMesh_r150o")
 script = ExtResource("1_idj7w")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.84981406)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4199336)
 
 [node name="CelestialBody" parent="CameraRoot" node_paths=PackedStringArray("ParentCamera") instance=ExtResource("3_kln2b")]
+visible = false
 ParentCamera = NodePath("../Camera3D")
 
 [node name="Control" type="Control" parent="."]
@@ -36,3 +49,27 @@ offset_top = 33.0
 offset_right = 153.0
 offset_bottom = 92.0
 script = ExtResource("4_rgh2o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("SphereMesh_pbw6q")
+surface_material_override/0 = SubResource("ShaderMaterial_v1gob")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1024, 512)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_pbw6q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2180173, -3.352484)
+visible = false
+light_energy = 16.7
+distance_fade_enabled = true
+distance_fade_begin = 0.0
+distance_fade_shadow = 20.0
