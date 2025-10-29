@@ -11,10 +11,22 @@ config_version=5
 [application]
 
 config/name="Svoxels"
-run/main_scene="uid://ubpqecqedalp"
+run/main_scene="uid://dm0mof0y7varc"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+run/max_fps=240
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=600
+window/stretch/aspect="ignore"
+window/vsync/vsync_mode=0
 
 [dotnet]
 
 project/assembly_name="Svoxels"
+
+[input_devices]
+
+pointing/max_fps=240

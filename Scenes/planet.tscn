@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://b1qb00ocljevk" path="res://Scripts/Planet.cs" id="1_vpe2g"]
 [ext_resource type="Texture2D" uid="uid://dv03trgjegrh7" path="res://icon.svg" id="2_m0iey"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("TargetRect")]
+[node name="PlanetCamera" type="Camera3D"]
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("TargetRect")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_vpe2g")
 TargetRect = NodePath("TextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

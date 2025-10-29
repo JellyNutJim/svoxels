@@ -15,7 +15,12 @@ void main() {
     
     // Create a gradient or pattern
     vec2 uv = vec2(pixel_coords) / vec2(image_size);
-    vec4 color = vec4(uv.x, uv.y, 0.5, 0.3);
+
+    vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
+
+    if (pixel_coords.x % 2 == 0) {
+        color = vec4(uv.x, uv.y, 1.0, 1.0);
+    }
     
     imageStore(output_image, pixel_coords, color);
 }

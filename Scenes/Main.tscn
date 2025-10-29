@@ -1,19 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm0mof0y7varc"]
+[gd_scene load_steps=6 format=3 uid="uid://dm0mof0y7varc"]
 
-[ext_resource type="Script" uid="uid://cm0gqqkqydc1o" path="res://Scenes/CameraRoot.cs" id="1_idj7w"]
-[ext_resource type="PackedScene" uid="uid://ubpqecqedalp" path="res://Scenes/planet.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://cm0gqqkqydc1o" path="res://Scripts/CameraRoot.cs" id="1_idj7w"]
+[ext_resource type="Script" uid="uid://5wy1kwtu8rxw" path="res://Scripts/Main.cs" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://ivq7uthfgkfk" path="res://Scenes/celestial_body.tscn" id="3_kln2b"]
+[ext_resource type="Script" uid="uid://dklu1r05mtw12" path="res://Scripts/Label.cs" id="4_rgh2o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r150o"]
 
 [node name="Root" type="Node3D"]
+script = ExtResource("1_kln2b")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75024605, -1.9140096)
 mesh = SubResource("BoxMesh_r150o")
 
 [node name="CameraRoot" type="Node3D" parent="."]
 script = ExtResource("1_idj7w")
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5640182)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.595826)
 
-[node name="Control" parent="CameraRoot/Camera3D" instance=ExtResource("1_r150o")]
+[node name="CelestialBody" parent="CameraRoot" node_paths=PackedStringArray("ParentCamera") instance=ExtResource("3_kln2b")]
+ParentCamera = NodePath("../Camera3D")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 33.0
+offset_right = 153.0
+offset_bottom = 92.0
+script = ExtResource("4_rgh2o")

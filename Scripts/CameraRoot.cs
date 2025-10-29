@@ -20,6 +20,7 @@ public partial class CameraRoot : Node3D
 
     public override void _Input(InputEvent @event)
     {
+        //GD.Print(@event.AsText());
         // Start/stop rotation on right mouse button
         if (@event is InputEventMouseButton mouseButton)
         {
@@ -41,10 +42,6 @@ public partial class CameraRoot : Node3D
             // Apply rotation to the pivot node
             Rotation = new Vector3(_pitch, _yaw, 0);
         }
-
-
-        var camera = GetNode<Camera3D>("Camera3D");
-        GD.Print($"{camera.GlobalRotation.Y} {camera.GlobalRotation.X}");
 
     }
 }
