@@ -120,9 +120,10 @@ public partial class CelestialBody : MeshInstance3D
 	
 	private void updateComputePipeline(int imageHeight)
 	{
-		// if (_texture.IsValid) rd.FreeRid(_texture);
-    	// if (_uniformSet.IsValid) rd.FreeRid(_uniformSet);
-		// if (_pipeline.IsValid) rd.FreeRid(_pipeline);
+		if (_uniformSet.IsValid) rd.FreeRid(_uniformSet);
+		if (_pipeline.IsValid) rd.FreeRid(_pipeline);
+		if (_serverTexture.IsValid) RenderingServer.FreeRid(_serverTexture); // Add this!
+		if (_texture.IsValid) rd.FreeRid(_texture);
 
 		_format = new RDTextureFormat
 		{
@@ -168,4 +169,16 @@ public partial class CelestialBody : MeshInstance3D
 
 		return (int)pixelWidth;
 	}
+
+	// Free Rids
+	public override void _ExitTree()
+    {
+        if (_uniformSet.IsValid) rd.FreeRid(_uniformSet);
+        if (_pipeline.IsValid) rd.FreeRid(_pipeline);
+        if (_serverTexture.IsValid) RenderingServer.FreeRid(_serverTexture);
+        if (_texture.IsValid) rd.FreeRid(_texture);
+        if (_uniformBuffer.IsValid) rd.FreeRid(_uniformBuffer);
+        if (_storageBuffer.IsValid) rd.FreeRid(_storageBuffer);
+        if (shader.IsValid) rd.FreeRid(shader);
+    }
 }
